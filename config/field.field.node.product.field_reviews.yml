@@ -1,0 +1,19 @@
+uuid: 5b021cf1-50fe-4152-b378-4b6510732f91
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reviews
+    - node.type.product
+id: node.product.field_reviews
+field_name: field_reviews
+entity_type: node
+bundle: product
+label: reviews
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

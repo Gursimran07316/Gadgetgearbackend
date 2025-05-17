@@ -1,0 +1,23 @@
+uuid: 0182b4ee-d10e-480f-a8f2-e30d17dcbb76
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_items_price
+    - node.type.order
+id: node.order.field_items_price
+field_name: field_items_price
+entity_type: node
+bundle: order
+label: 'Items Price'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

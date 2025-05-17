@@ -1,0 +1,19 @@
+uuid: 4978eb13-c600-45c8-867f-d2c145fec577
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_order_items
+    - node.type.order
+id: node.order.field_order_items
+field_name: field_order_items
+entity_type: node
+bundle: order
+label: 'order items'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

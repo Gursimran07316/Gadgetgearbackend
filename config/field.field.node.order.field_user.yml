@@ -1,0 +1,21 @@
+uuid: 81465fc0-6ecc-4ff3-8de0-15c59e78c27b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_user
+    - node.type.order
+id: node.order.field_user
+field_name: field_user
+entity_type: node
+bundle: order
+label: User
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings: {  }
+field_type: entity_reference

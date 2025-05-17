@@ -1,0 +1,8 @@
+name: 'Custom API'
+type: module
+description: 'Provides a custom REST API for products.'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - node
+ 

@@ -1,0 +1,23 @@
+uuid: c2e3bea6-f20a-4dcf-9dcf-430090fc3961
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tax_price
+    - node.type.order
+id: node.order.field_tax_price
+field_name: field_tax_price
+entity_type: node
+bundle: order
+label: 'Tax Price'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

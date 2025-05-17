@@ -1,0 +1,21 @@
+uuid: 3f6d3d6e-a4c2-4e70-9e6f-90ec29b048cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_payment_method
+    - node.type.order
+  module:
+    - options
+id: node.order.field_payment_method
+field_name: field_payment_method
+entity_type: node
+bundle: order
+label: 'Payment Method'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

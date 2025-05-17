@@ -1,0 +1,23 @@
+uuid: 4885c349-d372-485e-958a-d83ff6d76e7c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_total_price
+    - node.type.order
+id: node.order.field_total_price
+field_name: field_total_price
+entity_type: node
+bundle: order
+label: 'Total Price'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal
