@@ -1,0 +1,23 @@
+uuid: 1c72d45d-813b-4574-94fd-d88542b98505
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_rating
+    - node.type.product
+id: node.product.field_rating
+field_name: field_rating
+entity_type: node
+bundle: product
+label: Rating
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

@@ -1,0 +1,92 @@
+uuid: 1627fc99-4c75-40d5-a517-eb643483eac8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.order.field_is_delivered
+    - field.field.node.order.field_is_paid
+    - field.field.node.order.field_items_price
+    - field.field.node.order.field_order_items
+    - field.field.node.order.field_payment_method
+    - field.field.node.order.field_shipping
+    - field.field.node.order.field_shipping_price
+    - field.field.node.order.field_tax_price
+    - field.field.node.order.field_total_price
+    - field.field.node.order.field_user
+    - node.type.order
+  module:
+    - path
+id: node.order.default
+targetEntityType: node
+bundle: order
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_order_items:
+    type: string_textarea
+    weight: 121
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 15
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 120
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 16
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  field_is_delivered: true
+  field_is_paid: true
+  field_items_price: true
+  field_payment_method: true
+  field_shipping: true
+  field_shipping_price: true
+  field_tax_price: true
+  field_total_price: true
+  field_user: true

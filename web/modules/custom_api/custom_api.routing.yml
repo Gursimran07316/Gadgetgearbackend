@@ -1,0 +1,176 @@
+custom_api.products:
+  path: '/api/products'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\ProductApiController::getProducts'
+    _title: 'Products API'
+  requirements:
+    _permission: 'access content'
+  methods: [GET]
+    
+custom_api.create_product:
+  path: '/api/products'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\ProductApiController::createProduct'
+    _title: 'Create Product'
+  requirements:
+    _permission: 'access content'
+  methods: [POST]
+
+custom_api.update_product:
+  path: '/api/products/{id}'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\ProductApiController::updateProduct'
+    _title: 'Update Product'
+  requirements:
+    _permission: 'access content'
+  methods: [PUT]
+
+custom_api.delete_product:
+  path: '/api/products/{id}'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\ProductApiController::deleteProduct'
+    _title: 'Delete Product'
+  requirements:
+    _permission: 'access content'
+  methods: [DELETE]
+
+custom_api.products_top:
+  path: '/api/products/top'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\ProductApiController::getTopProducts'
+    _title: 'Top Products'
+  requirements:
+    _permission: 'access content'
+  methods: [GET]
+
+custom_api.product:
+  path: '/api/products/{id}'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\ProductApiController::getProductById'
+    _title: 'Product Details'
+  requirements:
+    _permission: 'access content'
+  methods: [GET]
+
+custom_api.product_review:
+  path: '/api/products/{id}/reviews'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\ProductApiController::createReview'
+    _title: 'Create a product review'
+  requirements:
+    _permission: 'access content'
+  methods: [POST]
+
+
+custom_api.login:
+  path: '/api/users/auth'
+  defaults:
+    _title: 'Login User'
+    _controller: '\Drupal\custom_api\Controller\UserAuthController::loginUser'
+  requirements:
+    _permission: 'access content'
+  methods: [POST]
+
+custom_api.register_user:
+  path: '/api/users'
+  defaults:
+    _title: 'Register User'
+    _controller: '\Drupal\custom_api\Controller\UserAuthController::registerUser'
+  requirements:
+    _permission: 'access content'
+  methods: [POST]
+
+custom_api.logout:
+  path: '/api/users/logout'
+  defaults:
+    _title: 'Logout User'
+    _controller: '\Drupal\custom_api\Controller\UserAuthController::logoutUser'
+  requirements:
+    _permission: 'access content'
+  methods: [POST]
+
+custom_api.get_users:
+  path: '/api/users'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\UserAuthController::getUsers'
+    _title: 'Get all users'
+  requirements:
+    _permission: 'access content'
+  methods: [GET]
+    
+
+custom_api.get_user_by_id:
+  path: '/api/users/{id}'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\UserAuthController::getUserById'
+    _title: 'Get user by ID'
+  requirements:
+    _permission: 'access content'
+    id: \d+
+  methods: [GET]
+
+custom_api.update_user:
+  path: '/api/users/{id}'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\UserAuthController::updateUser'
+    _title: 'Update user'
+  requirements:
+    _permission: 'access content'
+    id: \d+
+  methods: [PUT]
+
+custom_api.delete_user:
+  path: '/api/users/{id}'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\UserAuthController::deleteUser'
+    _title: 'Delete user'
+  requirements:
+    _permission: 'access content'
+    id: \d+
+  methods: [DELETE]
+
+
+custom_api.create_order:
+  path: '/api/orders'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\OrderController::addOrderItems'
+    _title: 'Create Order'
+  requirements:
+    _permission: 'access content'
+  methods: [POST]
+
+custom_api.my_orders:
+  path: '/api/orders/mine'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\OrderController::getMyOrders'
+    _title: 'My Orders'
+  requirements:
+    _permission: 'access content'
+  methods: [GET]
+    
+custom_api.get_order_by_id:
+  path: '/api/orders/{id}'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\OrderController::getOrderById'
+    _title: 'Get Order by ID'
+  requirements:
+    _permission: 'access content'
+    id: \d+
+  methods: [GET]
+custom_api.get_all_orders:
+  path: '/api/orders'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\OrderController::getAllOrders'
+    _title: 'Get All Orders'
+  requirements:
+    _permission: 'access content'
+  methods: [GET]
+
+custom_api.mark_order_delivered:
+  path: '/api/orders/{id}/deliver'
+  defaults:
+    _controller: '\Drupal\custom_api\Controller\OrderController::markOrderDelivered'
+    _title: 'Mark Order Delivered'
+  requirements:
+    _permission: 'access content'
+  methods: [PUT]

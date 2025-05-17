@@ -1,0 +1,22 @@
+uuid: d57ad98c-666b-461b-a596-ca615c2538e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_shipping
+    - node.type.order
+  module:
+    - text
+id: node.order.field_shipping
+field_name: field_shipping
+entity_type: node
+bundle: order
+label: 'Shipping Address'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

@@ -1,0 +1,21 @@
+uuid: 2c2654aa-249a-4bd8-9d40-fe3a73313e4a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_is_paid
+    - node.type.order
+id: node.order.field_is_paid
+field_name: field_is_paid
+entity_type: node
+bundle: order
+label: 'Is Paid'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

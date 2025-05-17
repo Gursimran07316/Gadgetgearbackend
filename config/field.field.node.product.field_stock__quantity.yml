@@ -1,0 +1,23 @@
+uuid: ae2a6a1c-3b77-4adf-b381-20f9f129dcd3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_stock__quantity
+    - node.type.product
+id: node.product.field_stock__quantity
+field_name: field_stock__quantity
+entity_type: node
+bundle: product
+label: 'Stock Quantity'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -1,0 +1,45 @@
+uuid: 53fed97d-4da0-4da8-b217-6b85a05a3a49
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.order.field_is_delivered
+    - field.field.node.order.field_is_paid
+    - field.field.node.order.field_items_price
+    - field.field.node.order.field_order_items
+    - field.field.node.order.field_payment_method
+    - field.field.node.order.field_shipping
+    - field.field.node.order.field_shipping_price
+    - field.field.node.order.field_tax_price
+    - field.field.node.order.field_total_price
+    - field.field.node.order.field_user
+    - node.type.order
+  module:
+    - user
+id: node.order.default
+targetEntityType: node
+bundle: order
+mode: default
+content:
+  field_order_items:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_is_delivered: true
+  field_is_paid: true
+  field_items_price: true
+  field_payment_method: true
+  field_shipping: true
+  field_shipping_price: true
+  field_tax_price: true
+  field_total_price: true
+  field_user: true

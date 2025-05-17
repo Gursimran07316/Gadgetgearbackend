@@ -1,0 +1,54 @@
+uuid: 75aed412-1ba0-4fb6-8daf-1f968edd5208
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.product.field_brand
+    - field.field.node.product.field_category
+    - field.field.node.product.field_description
+    - field.field.node.product.field_num_reviews
+    - field.field.node.product.field_price
+    - field.field.node.product.field_product_image
+    - field.field.node.product.field_rating
+    - field.field.node.product.field_reviews
+    - field.field.node.product.field_stock__quantity
+    - node.type.product
+  module:
+    - image
+    - user
+id: node.product.default
+targetEntityType: node
+bundle: product
+mode: default
+content:
+  field_product_image:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_reviews:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_brand: true
+  field_category: true
+  field_description: true
+  field_num_reviews: true
+  field_price: true
+  field_rating: true
+  field_stock__quantity: true

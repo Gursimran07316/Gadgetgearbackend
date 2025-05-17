@@ -1,0 +1,23 @@
+uuid: a40ccef5-c6fd-4c38-9c2e-0b97b186487e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_num_reviews
+    - node.type.product
+id: node.product.field_num_reviews
+field_name: field_num_reviews
+entity_type: node
+bundle: product
+label: 'Number of Reviews'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

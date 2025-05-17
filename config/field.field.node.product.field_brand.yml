@@ -1,0 +1,19 @@
+uuid: 1c49b008-cf88-430c-8ebc-69f8af9f8d85
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_brand
+    - node.type.product
+id: node.product.field_brand
+field_name: field_brand
+entity_type: node
+bundle: product
+label: Brand
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

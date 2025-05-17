@@ -1,0 +1,11 @@
+uuid: 35a1ba60-f5dd-4a63-8c91-705eda47b35f
+langcode: en
+status: true
+dependencies: {  }
+name: Order
+type: order
+description: 'Stores customer orders with items, totals, and status.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true
