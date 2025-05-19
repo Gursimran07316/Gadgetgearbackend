@@ -1,4 +1,4 @@
-parameters:
+parameters: 
   # Toggles the super user access policy. If your website has at least one user
   # with the Administrator role, it is advised to set this to false. This allows
   # you to make user 1 a regular user, strengthening the security of your site.
@@ -214,7 +214,7 @@ parameters:
   # Read https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
   # for more information about the topic in general.
   # Note: By default the configuration is disabled.
-cors.config:
+ cors.config:
   enabled: true
   allowedHeaders: ['*']
   allowedMethods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS']
