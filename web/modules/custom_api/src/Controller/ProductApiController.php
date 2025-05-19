@@ -149,7 +149,7 @@ class ProductApiController {
   }
 
   public function createProduct(Request $request) {
-    $jwt = $request->cookies->get('jwt');
+    $jwt = $request->cookies->get('STYXKEY-jwt');
     if (!$jwt) return new JsonResponse(['message' => 'Not authorized, no token'], 401);
 
     $key = Key::load('simple_oauth');
@@ -194,7 +194,7 @@ class ProductApiController {
   }
 
   public function updateProduct(Request $request, $id) {
-    $jwt = $request->cookies->get('jwt');
+    $jwt = $request->cookies->get('STYXKEY-jwt');
     if (!$jwt) return new JsonResponse(['message' => 'Not authorized, no token'], 401);
 
     $key = Key::load('simple_oauth');

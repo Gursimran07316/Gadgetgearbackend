@@ -13,7 +13,7 @@ use Firebase\JWT\Key as JWTKey;
 class OrderController {
 
   public function addOrderItems(Request $request) {
-    $jwt = $request->cookies->get('jwt');
+    $jwt = $request->cookies->get('STYXKEY-jwt');
     if (!$jwt) {
       return new JsonResponse(['message' => 'Not authorized, no token'], 401);
     }
@@ -101,7 +101,7 @@ class OrderController {
   }
 
   public function getMyOrders(Request $request) {
-    $jwt = $request->cookies->get('jwt');
+    $jwt = $request->cookies->get('STYXKEY-jwt');
     if (!$jwt) {
       return new JsonResponse(['message' => 'Not authorized, no token'], 401);
     }
@@ -156,7 +156,7 @@ class OrderController {
   }
 
   public function getOrderById(Request $request, $id) {
-    $jwt = $request->cookies->get('jwt');
+    $jwt = $request->cookies->get('STYXKEY-jwt');
     if (!$jwt) {
       return new JsonResponse(['message' => 'Not authorized, no token'], 401);
     }
@@ -213,7 +213,7 @@ class OrderController {
   }
 
   public function getAllOrders(Request $request) {
-    $jwt = $request->cookies->get('jwt');
+    $jwt = $request->cookies->get('STYXKEY-jwt');
     if (!$jwt) {
       return new JsonResponse(['message' => 'Not authorized, no token'], 401);
     }
@@ -263,7 +263,7 @@ class OrderController {
   }
 
   public function markOrderDelivered(Request $request, $id) {
-    $jwt = $request->cookies->get('jwt');
+    $jwt = $request->cookies->get('STYXKEY-jwt');
     if (!$jwt) {
       return new JsonResponse(['message' => 'Not authorized, no token'], 401);
     }

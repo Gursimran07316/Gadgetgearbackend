@@ -56,7 +56,7 @@ class UserAuthController extends ControllerBase {
     ]);
 
     $response->headers->setCookie(new Cookie(
-      'jwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, false, true, false, 'Strict'
+      'STYXKEY-jwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, false, true, false, 'Strict'
     ));
 
     return $response;
@@ -64,7 +64,7 @@ class UserAuthController extends ControllerBase {
 
   public function logoutUser(Request $request) {
     $response = new JsonResponse(['message' => 'Logged out successfully.'], 200);
-    $response->headers->clearCookie('jwt', '/', null, false, true, false, 'Strict');
+    $response->headers->clearCookie('jSTYXKEY-jwt', '/', null, false, true, false, 'Strict');
     return $response;
   }
 
@@ -112,7 +112,7 @@ class UserAuthController extends ControllerBase {
     ], 201);
 
     $response->headers->setCookie(new Cookie(
-      'jwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, false, true, false, 'Strict'
+      'STYXKEY-jwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, false, true, false, 'Strict'
     ));
 
     return $response;
@@ -235,7 +235,7 @@ class UserAuthController extends ControllerBase {
 
   private function getAuthenticatedUser(bool $requireAdmin = false): User {
     $request = \Drupal::request();
-    $jwt = $request->cookies->get('jwt');
+    $jwt = $request->cookies->get('STYXKEY-jwt');
 
     if (!$jwt) {
       throw new \Exception('Not authorized, no token.', 401);
