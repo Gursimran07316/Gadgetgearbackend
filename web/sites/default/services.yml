@@ -3,7 +3,7 @@ parameters:
     enabled: true
     allowedHeaders: ['*']
     allowedMethods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'PUT', 'DELETE']
-    allowedOrigins: ['https://gadgetgearfrontend.onrender.com,'http://localhost:3000']
+    allowedOrigins: ['https://gadgetgearfrontend.onrender.com']
     exposedHeaders: false
     maxAge: 1000
     supportsCredentials: true
