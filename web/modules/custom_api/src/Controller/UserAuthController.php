@@ -235,7 +235,7 @@ class UserAuthController extends ControllerBase {
 
   private function getAuthenticatedUser(bool $requireAdmin = false): User {
     $request = \Drupal::request();
-    $jwt = $request->cookies->get('jwt');
+    $jwt = $request->cookies->get('STYXKEY-jwt');
 
     if (!$jwt) {
       throw new \Exception('Not authorized, no token.', 401);
