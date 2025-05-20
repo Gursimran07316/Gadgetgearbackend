@@ -56,7 +56,7 @@ class UserAuthController extends ControllerBase {
     ]);
 
     $response->headers->setCookie(new Cookie(
-      'jwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, true, true, false, 'None'
+      'SESSjwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, true, true, false, 'None'
     ));
 
     return $response;
@@ -64,7 +64,7 @@ class UserAuthController extends ControllerBase {
 
   public function logoutUser(Request $request) {
     $response = new JsonResponse(['message' => 'Logged out successfully.'], 200);
-    $response->headers->clearCookie('jwt', '/', null, false, true, false, 'None');
+    $response->headers->clearCookie('SESSjwt', '/', null, false, true, false, 'None');
     return $response;
   }
 
@@ -112,7 +112,7 @@ class UserAuthController extends ControllerBase {
     ], 201);
 
     $response->headers->setCookie(new Cookie(
-      'jwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, true, true, false, 'None'
+      'SESSjwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, true, true, false, 'None'
     ));
 
     return $response;
