@@ -56,7 +56,7 @@ class UserAuthController extends ControllerBase {
     ]);
 
     $response->headers->setCookie(new Cookie(
-      'STYXKEY-jwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, false, true, false, 'Strict'
+      'STYXKEY-jwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, true, true, false, 'None'
     ));
 
     return $response;
@@ -64,7 +64,7 @@ class UserAuthController extends ControllerBase {
 
   public function logoutUser(Request $request) {
     $response = new JsonResponse(['message' => 'Logged out successfully.'], 200);
-    $response->headers->clearCookie('jSTYXKEY-jwt', '/', null, false, true, false, 'Strict');
+    $response->headers->clearCookie('STYXKEY-jwt', '/', null, false, true, false, 'None');
     return $response;
   }
 
@@ -112,7 +112,7 @@ class UserAuthController extends ControllerBase {
     ], 201);
 
     $response->headers->setCookie(new Cookie(
-      'STYXKEY-jwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, false, true, false, 'Strict'
+      'STYXKEY-jwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, true, true, false, 'None'
     ));
 
     return $response;
