@@ -112,7 +112,7 @@ class UserAuthController extends ControllerBase {
     ], 201);
 
     $response->headers->setCookie(new Cookie(
-      'SESSjwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, true, true, false, 'None'
+      'SESSjwt', $jwt, time() + 30 * 24 * 60 * 60, '/', null, true, true, false, 'Lax'
     ));
 
     return $response;
