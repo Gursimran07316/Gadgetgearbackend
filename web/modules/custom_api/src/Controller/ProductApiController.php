@@ -257,7 +257,7 @@ class ProductApiController {
       'category' => $node->get('field_category')->value,
       'description' => $node->get('field_description')->value,
       'price' => $node->get('field_price')->value,
-      'stock_quantity' => $node->get('field_stock__quantity')->value,
+      'countInStock' => $node->get('field_stock__quantity')->value,
       'rating' => $node->get('field_rating')->value,
       'numReviews' => $node->get('field_num_reviews')->value,
       'image' => $node->get('field_product_image')->entity
