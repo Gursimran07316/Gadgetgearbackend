@@ -5,7 +5,7 @@ parameters:
     allowedMethods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'PUT', 'DELETE']
     allowedOrigins: ['https://gadgetgearfrontend.onrender.com']
     exposedHeaders: false
-    maxAge: 1000
+    maxAge: false
     supportsCredentials: true
 
   error_level: verbose
