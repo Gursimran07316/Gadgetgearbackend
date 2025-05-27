@@ -6,11 +6,31 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
-use Drupal\key\Entity\Key;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key as JWTKey;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\key\KeyRepositoryInterface;
+use Drupal\Core\Controller\ControllerBase;
 
-class OrderController {
+class OrderController extends ControllerBase {
+  protected $entityTypeManager;
+  protected $keyRepository;
+
+  public function __construct(
+    EntityTypeManagerInterface $entityTypeManager,
+    KeyRepositoryInterface $keyRepository
+  ) {
+    $this->entityTypeManager = $entityTypeManager;
+    $this->keyRepository = $keyRepository;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('entity_type.manager'),
+      $container->get('key.repository')
+    );
+  }
 
   public function addOrderItems(Request $request) {
     $jwt = $request->cookies->get('STYXKEY-jwt');
@@ -18,7 +38,7 @@ class OrderController {
       return new JsonResponse(['message' => 'Not authorized, no token'], 401);
     }
 
-    $key = Key::load('simple_oauth');
+    $key = $this->keyRepository->getKey('simple_oauth');
     $secret = $key ? $key->getKeyValue() : '';
     if (!$secret) {
       return new JsonResponse(['message' => 'JWT secret not configured'], 500);
@@ -45,7 +65,7 @@ class OrderController {
     }
 
     $product_ids = array_map(fn($item) => $item['_id'], $orderItems);
-    $products = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($product_ids);
+    $products = $this->entityTypeManager->getStorage('node')->loadMultiple($product_ids);
 
     $validatedItems = [];
     $itemsPrice = 0;
@@ -106,7 +126,7 @@ class OrderController {
       return new JsonResponse(['message' => 'Not authorized, no token'], 401);
     }
 
-    $key = Key::load('simple_oauth');
+    $key = $this->keyRepository->getKey('simple_oauth');
     $secret = $key ? $key->getKeyValue() : null;
     if (!$secret) {
       return new JsonResponse(['message' => 'JWT secret missing'], 500);
@@ -119,7 +139,7 @@ class OrderController {
         return new JsonResponse(['message' => 'Invalid token'], 401);
       }
 
-      $query = \Drupal::entityTypeManager()->getStorage('node')->getQuery()
+      $query = $this->entityTypeManager->getStorage('node')->getQuery()
         ->condition('type', 'order')
         ->condition('field_user', $uid)
         ->accessCheck(FALSE);
@@ -161,7 +181,7 @@ class OrderController {
       return new JsonResponse(['message' => 'Not authorized, no token'], 401);
     }
 
-    $key = Key::load('simple_oauth');
+    $key = $this->keyRepository->getKey('simple_oauth');
     $secret = $key ? $key->getKeyValue() : null;
     if (!$secret) {
       return new JsonResponse(['message' => 'JWT secret missing'], 500);
@@ -218,7 +238,7 @@ class OrderController {
       return new JsonResponse(['message' => 'Not authorized, no token'], 401);
     }
 
-    $key = Key::load('simple_oauth');
+    $key = $this->keyRepository->getKey('simple_oauth');
     $secret = $key ? $key->getKeyValue() : null;
     if (!$secret) {
       return new JsonResponse(['message' => 'JWT secret missing'], 500);
@@ -233,7 +253,7 @@ class OrderController {
         return new JsonResponse(['message' => 'Admin access required'], 403);
       }
 
-      $query = \Drupal::entityTypeManager()->getStorage('node')->getQuery()
+      $query = $this->entityTypeManager->getStorage('node')->getQuery()
         ->accessCheck(FALSE)
         ->condition('type', 'order');
 
@@ -268,7 +288,7 @@ class OrderController {
       return new JsonResponse(['message' => 'Not authorized, no token'], 401);
     }
 
-    $key = Key::load('simple_oauth');
+    $key = $this->keyRepository->getKey('simple_oauth');
     $secret = $key ? $key->getKeyValue() : null;
     if (!$secret) {
       return new JsonResponse(['message' => 'JWT secret missing'], 500);

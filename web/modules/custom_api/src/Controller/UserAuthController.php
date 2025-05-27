@@ -7,12 +7,39 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Cookie;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\user\Entity\User;
-use Drupal\key\Entity\Key;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key as JWTKey;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Routing\CurrentRouteMatch;
+use Drupal\user\UserAuthInterface;
+use Drupal\key\KeyRepositoryInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+
 
 class UserAuthController extends ControllerBase {
+  protected $entityTypeManager;
+  protected $userAuth;
+  protected $keyRepository;
 
+
+  public function __construct(
+    EntityTypeManagerInterface $entityTypeManager,
+    UserAuthInterface $userAuth,
+    KeyRepositoryInterface $keyRepository
+  ) {
+    $this->entityTypeManager = $entityTypeManager;
+    $this->userAuth = $userAuth;
+    $this->keyRepository = $keyRepository;
+  }
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('entity_type.manager'),
+      $container->get('user.auth'),
+      $container->get('key.repository')
+    );
+  }
   public function loginUser(Request $request) {
     $data = json_decode($request->getContent(), TRUE);
     $email = $data['email'] ?? '';
@@ -22,7 +49,7 @@ class UserAuthController extends ControllerBase {
       return new JsonResponse(['message' => 'Email and password are required.'], 400);
     }
 
-    $users = \Drupal::entityTypeManager()
+    $users = $this->entityTypeManager
       ->getStorage('user')
       ->loadByProperties(['mail' => $email]);
 
@@ -32,7 +59,7 @@ class UserAuthController extends ControllerBase {
       return new JsonResponse(['message' => 'Invalid user.'], 401);
     }
 
-    $is_valid = \Drupal::service('user.auth')
+    $is_valid = $this->userAuth
       ->authenticate($user->getAccountName(), $password);
 
     if (!$is_valid) {
@@ -78,7 +105,7 @@ class UserAuthController extends ControllerBase {
       return new JsonResponse(['message' => 'Name, email, and password are required.'], 400);
     }
 
-    $existing = \Drupal::entityTypeManager()
+    $existing = $this->entityTypeManager
       ->getStorage('user')
       ->loadByProperties(['mail' => $email]);
 
@@ -122,7 +149,7 @@ class UserAuthController extends ControllerBase {
     try {
       $this->getAuthenticatedUser(true);
 
-      $users = \Drupal::entityTypeManager()->getStorage('user')->loadMultiple();
+      $users = $this->entityTypeManager->getStorage('user')->loadMultiple();
       $data = [];
 
       foreach ($users as $user) {
@@ -225,7 +252,7 @@ class UserAuthController extends ControllerBase {
   // ---------------------
 
   private function getJwtSecret() {
-    $key = Key::load('simple_oauth');
+    $key = $this->keyRepository->getKey('simple_oauth');;
     $secret = $key ? $key->getKeyValue() : '';
     if (!$secret) {
       throw new \Exception('JWT secret not configured.', 500);

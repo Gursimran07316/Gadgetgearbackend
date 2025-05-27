@@ -4,23 +4,48 @@ namespace Drupal\custom_api\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Drupal\Core\Controller\ControllerBase;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
-use Drupal\key\Entity\Key;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key as JWTKey;
+use Drupal\key\KeyRepositoryInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\File\FileUrlGeneratorInterface;
+class ProductApiController  extends ControllerBase{
 
-class ProductApiController {
+  protected $entityTypeManager;
+  protected $keyRepository;
+  protected $fileUrlGenerator;
+ 
+  public function __construct(
+    EntityTypeManagerInterface $entityTypeManager,
+    KeyRepositoryInterface $keyRepository,
+    FileUrlGeneratorInterface $fileUrlGenerator
+  ) {
+    $this->entityTypeManager = $entityTypeManager;
+    $this->keyRepository = $keyRepository;
+    $this->fileUrlGenerator = $fileUrlGenerator;
+  }
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('entity_type.manager'),
+      $container->get('key.repository'),
+      $container->get('file_url_generator'),
+    
+    );
+  }
 
-  public function getProducts() {
-    $request = \Drupal::request();
+  public function getProducts(Request $request) {
+    
     $queryParam = $request->query;
 
     $pageSize = getenv('PAGINATION_LIMIT') ?: 8;
     $page = max(1, (int) $queryParam->get('pageNumber', 1));
     $keyword = $queryParam->get('keyword');
 
-    $storage = \Drupal::entityTypeManager()->getStorage('node');
+    $storage = $this->entityTypeManager->getStorage('node');
     $query = $storage->getQuery()
       ->accessCheck(TRUE)
       ->condition('type', 'product')
@@ -61,7 +86,7 @@ class ProductApiController {
   }
 
   public function getTopProducts() {
-    $storage = \Drupal::entityTypeManager()->getStorage('node');
+    $storage = $this->entityTypeManager->getStorage('node');
     $query = $storage->getQuery()
       ->accessCheck(TRUE)
       ->condition('type', 'product')
@@ -98,7 +123,7 @@ class ProductApiController {
     $jwt = $request->cookies->get('jwt');
     if (!$jwt) return new JsonResponse(['message' => 'Not authorized, no token'], 401);
 
-    $key = Key::load('simple_oauth');
+    $key = $this->keyRepository->getKey('simple_oauth');
     $secret = $key ? $key->getKeyValue() : '';
     if (!$secret) return new JsonResponse(['message' => 'JWT secret not configured'], 500);
 
@@ -152,7 +177,7 @@ class ProductApiController {
     $jwt = $request->cookies->get('STYXKEY-jwt');
     if (!$jwt) return new JsonResponse(['message' => 'Not authorized, no token'], 401);
 
-    $key = Key::load('simple_oauth');
+    $key = $this->keyRepository('simple_oauth');
     $secret = $key ? $key->getKeyValue() : '';
     if (!$secret) return new JsonResponse(['message' => 'JWT secret not configured'], 500);
 
@@ -197,7 +222,7 @@ class ProductApiController {
     $jwt = $request->cookies->get('STYXKEY-jwt');
     if (!$jwt) return new JsonResponse(['message' => 'Not authorized, no token'], 401);
 
-    $key = Key::load('simple_oauth');
+    $key = $this->keyRepository('simple_oauth');
     $secret = $key ? $key->getKeyValue() : '';
     if (!$secret) return new JsonResponse(['message' => 'JWT secret not configured'], 500);
 
@@ -239,7 +264,7 @@ class ProductApiController {
   }
 
   public function deleteProduct($id) {
-    $node = \Drupal::entityTypeManager()->getStorage('node')->load($id);
+    $node = $this->entityTypeManager->getStorage('node')->load($id);
 
     if ($node && $node->bundle() === 'product') {
       $node->delete();
@@ -261,7 +286,7 @@ class ProductApiController {
       'rating' => $node->get('field_rating')->value,
       'numReviews' => $node->get('field_num_reviews')->value,
       'image' => $node->get('field_product_image')->entity
-        ? \Drupal::service('file_url_generator')->generateAbsoluteString(
+        ? $this->fileUrlGenerator->generateAbsoluteString(
             $node->get('field_product_image')->entity->getFileUri()
           )
         : null,
