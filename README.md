@@ -124,7 +124,7 @@ Content-Type: application/json
     git clone https://github.com/Gursimran07316/GadgetGear-Drupal.git
 
 Set up using Lando (recommended):
-```http
+```bash
     lando init --recipe drupal10 --webroot . --name gadgetgear
     lando start
     lando composer install
